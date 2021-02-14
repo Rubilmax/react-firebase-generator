@@ -17,9 +17,9 @@ function* fetch{{ properCase name }}(action: ReturnType<typeof actions.fetch{{ p
   try {
     const {{ camelCase name }}Id = action.payload;
 
-    yield put(actions.fetch{{ properCase name }}Success());
+    yield put(actions.fetch{{ properCase name }}sSuccess([]));
   } catch (error) {
-    yield put(actions.fetch{{ properCase name }}Error(error));
+    yield put(actions.fetch{{ properCase name }}sError(error));
   }
 }
 

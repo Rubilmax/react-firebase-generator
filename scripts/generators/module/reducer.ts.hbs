@@ -56,31 +56,6 @@ export default createReducer<{{ properCase name }}State>(initialState, {
     ...state,
     isFetching: [action.payload],
   }),
-  [actions.fetch{{ properCase name }}Error.type]: (
-    state: {{ properCase name }}State,
-    action: ReturnType<typeof actions.fetch{{ properCase name }}Error>,
-  ): {{ properCase name }}State => {
-    if (process.env.NODE_ENV !== 'production') {
-      console.error(action.payload);
-    }
-
-    return {
-      ...state,
-      isFetching: [],
-    };
-  },
-  [actions.fetch{{ properCase name }}Success.type]: (
-    state: {{ properCase name }}State,
-    action: ReturnType<typeof actions.fetch{{ properCase name }}Success>,
-  ): {{ properCase name }}State => ({
-    ...state,
-    allIds: _union(state.allIds, [action.payload.id]),
-    byIds: {
-      ...state.byIds,
-      [action.payload.id]: action.payload,
-    },
-    isFetching: _without(state.isFetching, action.payload.id),
-  }),
   [actions.fetch{{ properCase name }}s.type]: (
     state: {{ properCase name }}State,
     action: ReturnType<typeof actions.fetch{{ properCase name }}s>,
