@@ -1,12 +1,18 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 
-import Home from 'pages/Home';
+import Login from 'pages/Login';
 
-const AppRouter = () => (
-  <Switch>
-    <Route path="/" component={Home} />
-  </Switch>
-);
+import { useAuth } from 'services/firebase/auth';
+
+const AppRouter = () => {
+  useAuth();
+
+  return (
+    <Switch>
+      <Route path="/" component={Login} />
+    </Switch>
+  );
+};
 
 export default AppRouter;

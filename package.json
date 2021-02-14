@@ -7,10 +7,12 @@
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.0",
     "connected-react-router": "^6.8.0",
+    "firebase": "^8.2.7",
     "lodash": "^4.17.20",
     "normalizr": "^3.6.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-firebaseui": "^4.1.0",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.15.1",
     "react-redux": "^7.2.1",
@@ -42,17 +44,21 @@
     "@types/styled-components": "^5.1.7",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
+    "firebase-tools": "^9.3.0",
     "plop": "^2.7.4",
     "prettier": "^2.2.1",
     "redux-mock-store": "^1.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:emulators": "firebase emulators:start --only firestore --import=./data --export-on-exit",
     "build": "react-scripts build",
+    "deploy": "yarn build && firebase deploy --only hosting,firestore,storage",
     "test": "react-scripts test --testPathIgnorePatterns=fixtures",
     "eject": "react-scripts eject",
     "gen": "plop --plopfile scripts/generators/index.js",
-    "prettier": "prettier --write --loglevel silent \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\""
+    "prettier": "prettier --write --loglevel silent \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
+    "dev": "yarn build && firebase emulators:start --only hosting"
   },
   "jest": {
     "collectCoverageFrom": [
