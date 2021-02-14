@@ -7,7 +7,7 @@ import Login from 'pages/Login';
 import { useAuth } from 'services/firebase/auth';
 
 const AppRouter = () => {
-  const { isLogged } = useAuth();
+  const isLogged = useAuth();
 
   return (
     <Switch>

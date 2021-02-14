@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { auth } from 'modules/firebase/auth';
 import * as loginActions from 'modules/LoggedUser/LoggedUser.actions';
-import { selectLoggedUserEmail } from 'modules/LoggedUser/LoggedUser.selectors';
+import { selectLoggedUserId } from 'modules/LoggedUser/LoggedUser.selectors';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
-  const loggedUserEmail = useSelector(selectLoggedUserEmail);
-  const isLogged = !!loggedUserEmail;
+  const loggedUserId = useSelector(selectLoggedUserId);
+  const isLogged = !!loggedUserId;
 
   // handle Firebase Auth state
   React.useEffect(() => {
@@ -19,5 +19,5 @@ export const useAuth = () => {
     });
   }, [dispatch, isLogged]);
 
-  return { isLogged, loggedUserEmail };
+  return isLogged;
 };

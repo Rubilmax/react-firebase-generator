@@ -7,11 +7,13 @@ const initialState: LoggedUserState = {};
 export default createReducer<LoggedUserState>(initialState, {
   [actions.loginUser.type]: (
     state: LoggedUserState,
-    { payload: { uid, email } }: ReturnType<typeof actions.loginUser>,
+    { payload: { uid, email, displayName, phoneNumber } }: ReturnType<typeof actions.loginUser>,
   ): LoggedUserState => ({
     ...state,
     id: uid,
-    email: email!,
+    email,
+    displayName,
+    phoneNumber,
   }),
   [actions.logoutUser.type]: (): LoggedUserState => ({
     id: undefined,
