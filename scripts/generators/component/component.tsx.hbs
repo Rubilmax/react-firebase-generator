@@ -1,0 +1,24 @@
+import React from 'react';
+
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import { StyledContainer } from './{{ properCase name }}.style';
+{{#if wantConnect}}
+
+import { mapStateToProps, mapDispatchToProps } from './{{ properCase name }}.container';
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+type DispatchProps = typeof mapDispatchToProps;
+{{/if}}
+
+export interface OwnProps {}
+
+export interface Props extends {{#if wantConnect}}StateProps, DispatchProps, {{/if}}OwnProps {}
+
+const {{ properCase name }} = (props: Props) => {
+
+  return <></>;
+};
+
+export default {{ properCase name }};

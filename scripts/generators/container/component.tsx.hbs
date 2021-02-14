@@ -1,0 +1,7 @@
+{{#if wantConnect}}
+import { mapStateToProps, mapDispatchToProps } from './{{ properCase name }}.container';
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+type DispatchProps = typeof mapDispatchToProps;
+{{/if}}

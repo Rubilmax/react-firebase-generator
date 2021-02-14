@@ -1,0 +1,16 @@
+declare interface {{ properCase name }}State {
+{{#if isEntity}}
+  allIds: string[];
+  byIds: { [id: string]: {{ properCase name }} };
+  isCreating: boolean;
+  isFetching: string[];
+  isUpdating: string;
+  isDeleting: string;
+{{/if}}
+}
+
+{{#if isEntity}}
+declare interface {{ properCase name }} {
+  id: string
+}
+{{/if}}

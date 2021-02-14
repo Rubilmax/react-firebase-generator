@@ -1,0 +1,5 @@
+{{#if hasContainer}}
+export { default } from './{{ properCase name }}.container';
+{{else}}
+export { default } from './{{ properCase name }}.component';
+{{/if}}

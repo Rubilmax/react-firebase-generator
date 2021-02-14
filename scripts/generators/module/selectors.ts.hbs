@@ -1,0 +1,24 @@
+import { DefaultRootState } from 'react-redux';
+
+{{#if isEntity}}
+export const select{{ properCase name }}sIds = (state: DefaultRootState) => state.{{ camelCase name }}s.allIds;
+
+export const select{{ properCase name }}sByIds = (state: DefaultRootState) => state.{{ camelCase name }}s.byIds;
+
+export const select{{ properCase name }} = (id: string) => (state: DefaultRootState) =>
+  !!id ? select{{ properCase name }}sByIds(state)[id] : undefined;
+
+export const select{{ properCase name }}s = (ids: string[]) => (state: DefaultRootState) =>
+  ids.map((id) => select{{ properCase name }}(id)(state));
+
+export const selectIsCreating = (state: DefaultRootState) => state.{{ camelCase name }}s.isCreating;
+
+export const selectIsFetching = (...ids: string[]) => (state: DefaultRootState) =>
+  ids.some((id) => state.{{ camelCase name }}s.isFetching.includes(id));
+
+export const selectIsUpdating = (id: string) => (state: DefaultRootState) =>
+  state.{{ camelCase name }}s.isUpdating === id;
+
+export const selectIsDeleting = (id: string) => (state: DefaultRootState) =>
+  state.{{ camelCase name }}s.isDeleting === id;
+{{/if}}

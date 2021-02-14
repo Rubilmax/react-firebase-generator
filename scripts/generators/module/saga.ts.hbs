@@ -1,0 +1,65 @@
+import { select, call, put, takeEvery } from 'redux-saga/effects';
+
+import * as actions from './{{ properCase name }}.actions';
+
+{{#if isEntity}}
+function* create{{ properCase name }}(action: ReturnType<typeof actions.create{{ properCase name }}>) {
+  try {
+    const {{ camelCase name }} = action.payload;
+    
+    yield put(actions.create{{ properCase name }}Success({{ camelCase name }}));
+  } catch (error) {
+    yield put(actions.create{{ properCase name }}Error(error));
+  }
+}
+
+function* fetch{{ properCase name }}(action: ReturnType<typeof actions.fetch{{ properCase name }}>) {
+  try {
+    const {{ camelCase name }}Id = action.payload;
+
+    yield put(actions.fetch{{ properCase name }}Success());
+  } catch (error) {
+    yield put(actions.fetch{{ properCase name }}Error(error));
+  }
+}
+
+function* fetch{{ properCase name }}s(action: ReturnType<typeof actions.fetch{{ properCase name }}s>) {
+  try {
+    const {{ camelCase name }}Ids = action.payload;
+
+    yield put(actions.fetch{{ properCase name }}sSuccess([]));
+  } catch (error) {
+    yield put(actions.fetch{{ properCase name }}sError(error));
+  }
+}
+
+function* update{{ properCase name }}(action: ReturnType<typeof actions.update{{ properCase name }}>) {
+  try {
+    const {{ camelCase name }} = action.payload;
+
+    yield put(actions.update{{ properCase name }}Success(action.payload));
+  } catch (error) {
+    yield put(actions.update{{ properCase name }}Error(error));
+  }
+}
+
+function* delete{{ properCase name }}(action: ReturnType<typeof actions.delete{{ properCase name }}>) {
+  try {
+    const {{ camelCase name }}Id = action.payload;
+
+    yield put(actions.delete{{ properCase name }}Success({{ camelCase name }}Id));
+  } catch (error) {
+    yield put(actions.delete{{ properCase name }}Error(error));
+  }
+}
+{{/if}}
+
+export default function* {{ camelCase name }}Saga() {
+{{#if isEntity}}
+  yield takeEvery(actions.create{{ properCase name }}, create{{ properCase name }});
+  yield takeEvery(actions.fetch{{ properCase name }}, fetch{{ properCase name }});
+  yield takeEvery(actions.fetch{{ properCase name }}s, fetch{{ properCase name }}s);
+  yield takeEvery(actions.update{{ properCase name }}, update{{ properCase name }});
+  yield takeEvery(actions.delete{{ properCase name }}, delete{{ properCase name }});
+{{/if}}
+}

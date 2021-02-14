@@ -1,0 +1,24 @@
+{{#if wantMemo}}
+import React from 'react';
+{{/if}}
+import compose from 'recompose/compose';
+{{#if wantConnect}}
+import { connect, DefaultRootState } from 'react-redux';
+{{/if}}
+
+import {{ properCase name }}, { Props, OwnProps } from './{{ properCase name }}.component';
+{{#if wantConnect}}
+
+export const mapStateToProps = (state: DefaultRootState) => ({});
+
+export const mapDispatchToProps = {};
+{{/if}}
+
+export default compose<Props, OwnProps>(
+{{#if wantConnect}}
+  connect(mapStateToProps, mapDispatchToProps),
+{{/if}}
+{{#if wantMemo}}
+  React.memo,
+{{/if}}
+)({{ properCase name }});
