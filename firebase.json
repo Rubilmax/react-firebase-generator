@@ -1,15 +1,13 @@
 {
   "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "rules": "firestore.rules"
+  },
+  "database": {
+    "rules": "database.rules.json"
   },
   "hosting": {
     "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -21,11 +19,30 @@
     "firestore": {
       "port": 8080
     },
+    "database": {
+      "port": 9000
+    },
     "hosting": {
       "port": 5000
+    },
+    "auth": {
+      "port": 9099
+    },
+    "storage": {
+      "port": 9199
+    },
+    "functions": {
+      "port": 5001
     },
     "ui": {
       "enabled": true
     }
+  },
+  "functions": {
+    "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"],
+    "source": "functions"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
