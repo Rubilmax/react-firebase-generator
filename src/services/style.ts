@@ -1,26 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles';
-
 export const colors = {
-  primary: '#1a3668',
-  darkPrimary: '#0a1529',
-  secondary: '#e9ede2',
-  darkBlue: '#232232',
+  primary: '#b73232',
+  secondary: '#7182c0',
+  tertiary: '#f1c40f',
+  success: '2e7d32',
+  error: '#b73232',
+  warning: '#ff9800',
+  info: '#303f9f',
+  white: '#fdfdfd',
+  black: '#212121',
 };
-
-export const useColors = makeStyles({
-  lightGrey: {
-    color: '#ddd',
-  },
-  grey: {
-    color: '#aaa',
-  },
-  darkGrey: {
-    color: '#666',
-  },
-});
-
-export const useStyles = makeStyles({
-  nowrap: {
-    whiteSpace: 'nowrap',
-  },
-});

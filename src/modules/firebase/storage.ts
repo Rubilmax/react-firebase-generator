@@ -1,15 +1,12 @@
-import 'firebase/storage';
+import { getStorage, ref, list, deleteObject, getDownloadURL } from 'firebase/storage';
 
-import { firebase } from '.';
-
-const storage = firebase.storage();
+const storage = getStorage();
 
 export const getAllUrls = (refPath: string) => () =>
-  storage
-    .ref(refPath)
-    .list()
-    .then((result) => Promise.all(result.items.map((item) => item.getDownloadURL())));
+  list(ref(storage, refPath)).then((result) =>
+    Promise.all(result.items.map((item) => getDownloadURL(item))),
+  );
 
-export const getUrl = (refPath: string) => () => storage.ref(refPath).getDownloadURL();
+export const getUrl = (refPath: string) => () => getDownloadURL(ref(storage, refPath));
 
-export const remove = (refPath: string) => () => storage.ref(refPath).delete();
+export const remove = (refPath: string) => () => deleteObject(ref(storage, refPath));

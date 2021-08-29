@@ -1,6 +1,9 @@
 declare interface LoggedUserState {
   id?: string;
-  email?: string | null;
-  phoneNumber?: string | null;
-  displayName?: string | null;
+  messagingToken?: string;
+  claims?: { [claim: string]: any };
+}
+
+declare interface MessagingProfile extends WithHistory<{}> {
+  tokens: string[];
 }

@@ -4,6 +4,7 @@ import * as ReactHookForm from 'react-hook-form';
 import isEqual from 'react-fast-compare';
 import { useSelector, DefaultRootState } from 'react-redux';
 import { useLocation } from 'react-router';
+import _debounce from 'lodash/debounce';
 
 const shouldUpdate = (
   depsRef: React.MutableRefObject<React.DependencyList>,
@@ -52,43 +53,29 @@ export const useQueryParams = () => {
   return new URLSearchParams(location.search);
 };
 
-export const useForm = ({
-  defaultValues,
-  ...formOptions
-}: {
-  [key: string]: any;
-  defaultValues: { [key: string]: any };
-}) => {
-  const form = ReactHookForm.useForm({
-    shouldUnregister: false, // needed to keep state of form through pages
-    defaultValues: defaultValues as any,
-    ...formOptions,
-  });
+export const useTimeout = (handler: Parameters<typeof window.setTimeout>[0], timeout?: number) =>
+  React.useEffect(() => {
+    const timeoutId = window.setTimeout(handler, timeout);
 
-  const listeners: { [inputName: string]: (value: any) => any } = {};
-  const useListen = (inputName: string, callback: (newValue: any) => void) => {
-    listeners[inputName] = callback;
-  };
+    return () => window.clearTimeout(timeoutId);
+  }, [handler, timeout]);
 
-  const transforms: { [inputName: string]: (value: any) => any } = {};
-  const useTransform = (inputName: string, callback: (newValue: any) => any) => {
-    transforms[inputName] = callback;
-  };
+export const useEventListener = (
+  type: keyof WindowEventMap,
+  handler: Parameters<typeof window.addEventListener>[1],
+  cleanup?: () => void,
+) =>
+  React.useEffect(() => {
+    window.addEventListener(type, handler);
 
-  const resetFields = (fields: string | string[]) => {
-    form.unregister(fields);
-    form.clearErrors(fields);
-  };
+    return () => {
+      if (cleanup) cleanup();
+      window.removeEventListener(type, handler);
+    };
+  }, []);
 
-  const { reset } = form;
-  useDeepEffect(() => reset(defaultValues), [defaultValues, reset]);
-
-  return {
-    ...form,
-    resetFields,
-    useListen,
-    useTransform,
-    transforms,
-    listeners,
-  };
-};
+export const useDebouncedEventListener = (
+  type: keyof WindowEventMap,
+  handler: Parameters<typeof window.addEventListener>[1],
+  cleanup?: () => void,
+) => useEventListener(type, _debounce(handler, 10), cleanup);
