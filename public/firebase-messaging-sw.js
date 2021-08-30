@@ -5,6 +5,6 @@
 importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js');
 
-firebase.initializeApp({});
+const firebaseApp = initializeApp({});
 
-const messaging = firebase.messaging();
+const messaging = getMessaging(firebaseApp);

@@ -1,6 +1,8 @@
 import { getStorage, ref, list, deleteObject, getDownloadURL } from 'firebase/storage';
 
-const storage = getStorage();
+import { firebaseApp } from '.';
+
+const storage = getStorage(firebaseApp);
 
 export const getAllUrls = (refPath: string) => () =>
   list(ref(storage, refPath)).then((result) =>

@@ -18,9 +18,10 @@ import {
 
 import { isLocalhost } from 'services/navigation';
 
+import { firebaseApp } from '.';
 import { auth } from './auth';
 
-const firestore = getFirestore();
+const firestore = getFirestore(firebaseApp);
 if (isLocalhost) connectFirestoreEmulator(firestore, 'localhost', 8080);
 
 const converter = <T extends object>(): FirestoreDataConverter<WithHistory<WithId<T>>> => ({

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { firebaseUIConfig, auth } from 'modules/firebase/auth';
-
 export interface OwnProps {}
 
 export interface Props extends OwnProps {}

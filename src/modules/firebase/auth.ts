@@ -1,18 +1,7 @@
-import firebaseui from 'firebaseui';
-import { getAuth, GoogleAuthProvider, EmailAuthProvider } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
-export const auth = getAuth();
+import { firebaseApp } from '.';
+
+export const auth = getAuth(firebaseApp);
 
 auth.useDeviceLanguage();
-
-export const firebaseUIConfig: firebaseui.auth.Config = {
-  // Redirect flow instead of popup because popup not working on iOS standalone / Messenger browser
-  signInFlow: 'redirect',
-  signInOptions: [
-    GoogleAuthProvider.PROVIDER_ID,
-    {
-      provider: EmailAuthProvider.PROVIDER_ID,
-      signInMethod: EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
-    },
-  ],
-};

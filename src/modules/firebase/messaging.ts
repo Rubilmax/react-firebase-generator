@@ -2,8 +2,10 @@ import { getMessaging, getToken, isSupported } from 'firebase/messaging';
 
 import { serviceWorkerRegistration } from 'serviceWorkerUtils';
 
+import { firebaseApp } from '.';
+
 export const getMessagingToken = async () => {
-  const messaging = (await isSupported()) && getMessaging();
+  const messaging = (await isSupported()) && getMessaging(firebaseApp);
   if (!messaging) return;
 
   return getToken(messaging, {
